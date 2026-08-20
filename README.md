@@ -19,7 +19,7 @@ The one on the left is the QMI8658C, and the one on the right is the QMI8658A.
 <img width="864" height="576" alt="Image" src="https://github.com/user-attachments/assets/46880cbf-4a87-48c7-97c9-008d4b7a778c" />   
 
 # Wireing
-|QMI8658x||ESP32|ESP32-S2/S3|ESP32-C2/C3/C6||
+|QMI8658x||ESP32|ESP32-S2/S3|ESP32-Cx||
 |:-:|:-:|:-:|:-:|:-:|:-:|
 |VCC|--|3.3V|3.3V|3.3V||
 |GND|--|GND|GND|GND||
@@ -37,15 +37,15 @@ GND:i2c address is 0x6B.
 We can find the sensor using [i2c-tools](https://github.com/espressif/esp-idf/tree/master/examples/peripherals/i2c/i2c_tools).   
 
 - Selcect SCL and SDA using menuconfig.   
-<img width="659" height="486" alt="Image" src="https://github.com/user-attachments/assets/a33ecac0-066e-417a-9340-50b0799ef329" />
+	<img width="659" height="486" alt="Image" src="https://github.com/user-attachments/assets/a33ecac0-066e-417a-9340-50b0799ef329" />
 
 - Detect senser.   
-The i2c address for this sensor is 0x6A or 0x6B.   
-<img width="659" height="486" alt="Image" src="https://github.com/user-attachments/assets/4610006d-e636-4a25-8163-0492716f3f93" />
+	The i2c address for this sensor is 0x6A or 0x6B.   
+	<img width="659" height="486" alt="Image" src="https://github.com/user-attachments/assets/4610006d-e636-4a25-8163-0492716f3f93" />
 
 - Read register.   
-Register 0x00 for this sensor is 0x05.   
-<img width="659" height="486" alt="Image" src="https://github.com/user-attachments/assets/de336bcd-98c7-48e6-bbac-219b9209cd57" />
+	Register 0x00 for this sensor is 0x05.   
+	<img width="659" height="486" alt="Image" src="https://github.com/user-attachments/assets/de336bcd-98c7-48e6-bbac-219b9209cd57" />
 
 # Get Euler angles from qmi8658 using Kalman filter
 I used [this](https://github.com/TKJElectronics/KalmanFilter).
