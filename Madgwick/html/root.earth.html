@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.7/all/gauge.min.js"></script>
+	<script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
+	<title>Euler Meter</title>
+</head>
+
+<body>
+	<h1 id="header"></h1>
+
+	<div>
+	<canvas id="canvas0"></canvas>
+	</div>
+
+	<div>
+	<canvas id="canvas1"></canvas>
+	<canvas id="canvas2"></canvas>
+	<canvas id="canvas3"></canvas>
+	</div>
+
+	<script>
+		// wait for the page to load
+		window.addEventListener('DOMContentLoaded', init);
+
+		var gauge1 = new RadialGauge({
+			renderTo: 'canvas1',
+			width: 200,
+			height: 200,
+			units: "Deg",
+			minValue: -90,
+			maxValue: 90,
+			majorTicks: [
+				"-90", "-60", "-30", "0", "30", "60" , "90"
+			],
+			minorTicks: 3,
+			ticksAngle: 180,
+			startAngle: 90,
+			highlights: [
+				{ from: -90, to: 0, color: "rgba(0, 0, 255, .3)" },
+				{ from: 0, to: 90, color: "rgba(255, 0, 0, .75)" }
+			],
+			strokeTicks: true,
+			colorMajorTicks: "#ddd",
+			colorMinorTicks: "#ddd",
+			colorTitle: "#eee",
+			colorUnits: "#ccc",
+			colorNumbers: "#eee",
+			//colorPlate: "#fff",
+			colorPlate: "#222",
+			borderShadowWidth: 0,
+			borders: true,
+			colorBorderOuter: "#333",
+			colorBorderOuterEnd: "#111",
+			//colorBorderMiddle: "#222",
+			//colorBorderMiddleEnd: "#111",
+			colorBorderInner: "#111",
+			colorBorderInnerEnd: "#333",
+			needleType: "arrow",
+			needleWidth: 2,
+			needleCircleSize: 7,
+			needleCircleOuter: true,
+			needleCircleInner: false,
+			animationDuration: 500,
+			animationRule: "linear"
+		}).draw();
+
+		var gauge2 = new RadialGauge({
+			renderTo: 'canvas2',
+			width: 200,
+			height: 200,
+			units: "Deg",
+			minValue: -90,
+			maxValue: 90,
+			majorTicks: [
+				"-90", "-60", "-30", "0", "30", "60" , "90"
+			],
+			minorTicks: 3,
+			ticksAngle: 180,
+			startAngle: 90,
+			highlights: [
+				{ from: -90, to: 0, color: "rgba(0, 0, 255, .3)" },
+				{ from: 0, to: 90, color: "rgba(255, 0, 0, .75)" }
+			],
+			strokeTicks: true,
+			colorMajorTicks: "#ddd",
+			colorMinorTicks: "#ddd",
+			colorTitle: "#eee",
+			colorUnits: "#ccc",
+			colorNumbers: "#eee",
+			//colorPlate: "#fff",
+			colorPlate: "#222",
+			borderShadowWidth: 0,
+			borders: true,
+			colorBorderOuter: "#333",
+			colorBorderOuterEnd: "#111",
+			//colorBorderMiddle: "#222",
+			//colorBorderMiddleEnd: "#111",
+			colorBorderInner: "#111",
+			colorBorderInnerEnd: "#333",
+			needleType: "arrow",
+			needleWidth: 2,
+			needleCircleSize: 7,
+			needleCircleOuter: true,
+			needleCircleInner: false,
+			animationDuration: 500,
+			animationRule: "linear"
+		}).draw();
+
+		var gauge3 = new RadialGauge({
+			renderTo: 'canvas3',
+			width: 200,
+			height: 200,
+			//units: "Deg",
+			minValue: 0,
+			maxValue: 360,
+			majorTicks: [
+				"0", "45", "90", "135", "180", "225", "270", "225" ,"0"
+			],
+			minorTicks: 3,
+			ticksAngle: 360,
+			startAngle: 180,
+			highlights: false,
+			strokeTicks: true,
+			colorMajorTicks: "#ddd",
+			colorMinorTicks: "#ddd",
+			colorTitle: "#eee",
+			colorUnits: "#ccc",
+			colorNumbers: "#eee",
+			//colorPlate: "#fff",
+			colorPlate: "#222",
+			borderShadowWidth: 0,
+			borders: true,
+			colorBorderOuter: "#333",
+			colorBorderOuterEnd: "#111",
+			//colorBorderMiddle: "#222",
+			//colorBorderMiddleEnd: "#111",
+			colorBorderInner: "#111",
+			colorBorderInnerEnd: "#333",
+			needleType: "arrow",
+			needleWidth: 2,
+			needleCircleSize: 7,
+			needleCircleOuter: true,
+			needleCircleInner: false,
+			animationDuration: 500,
+			animationRule: "linear"
+		}).draw();
+
+		document.getElementById("canvas1").style.display = "none";
+		document.getElementById("canvas2").style.display = "none";
+		document.getElementById("canvas3").style.display = "none";
+
+		function init() {
+
+			// specify size
+			//const width = 960;
+			//const height = 540;
+			const width = 640;
+			const height = 360;
+
+			// create renderer
+			const renderer = new THREE.WebGLRenderer({
+				canvas: document.querySelector('#canvas0')
+			});
+			renderer.setPixelRatio(window.devicePixelRatio);
+			renderer.setSize(width, height);
+
+			// create scene
+			const scene = new THREE.Scene();
+
+			// create camera
+			const camera = new THREE.PerspectiveCamera(45, width / height);
+
+			// Create a parallel light source
+			//const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+			//directionalLight.position.set(1, 1, 1);
+			//scene.add(directionalLight);
+
+			// Create a omnidirectional light source
+			const ambientLight = new THREE.AmbientLight(0xffffff, 2);
+			scene.add(ambientLight);
+
+			// Load earth textures from threejs.org
+			const texture = new THREE.TextureLoader().load("https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg");
+			texture.colorSpace = THREE.SRGBColorSpace; // Specify color space
+
+			// Create material
+			const material = new THREE.MeshStandardMaterial({
+				map: texture,
+				side: THREE.DoubleSide,
+			});
+
+			// Create a sphere shape
+			const geometry = new THREE.SphereGeometry(300, 30, 30);
+			// Creating a mesh from geometry and materials
+			const earthMesh = new THREE.Mesh(geometry, material);
+			// Adding Meshes to the Scene
+			scene.add(earthMesh);
+
+			// Create stardust background (to show camera movement)
+			createStarField();
+
+			/** Create a stardust background */
+			function createStarField() {
+				// Create vertex information
+				const vertices = [];
+				for (let i = 0; i < 1000; i++) {
+					const x = 3000 * (Math.random() - 0.5);
+					const y = 3000 * (Math.random() - 0.5);
+					const z = 3000 * (Math.random() - 0.5);
+					vertices.push(x, y, z);
+				}
+
+				// Create shape data
+				const geometry = new THREE.BufferGeometry();
+				geometry.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
+
+				// Create material
+				const material = new THREE.PointsMaterial({
+					size: 10,
+					color: 0xffffff,
+				});
+
+				// Render point clouds
+				const mesh = new THREE.Points(geometry, material);
+				scene.add(mesh);
+			} // end function
+
+			tick();
+
+			// A loop event that runs every frame
+			function tick() {
+				const radian = (yaw * Math.PI) / 180;
+				// Set camera position according to yaw
+				camera.position.x = 1000 * Math.sin(radian);
+				camera.position.z = 1000 * Math.cos(radian);
+
+				// View the origin direction
+				camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+				// Set camera rotation according to roll & pitch
+				camera.rotation.x = pitch; // in radians
+				camera.rotation.z = roll; // in radians
+
+				// Rendering
+				renderer.render(scene, camera);
+
+				requestAnimationFrame(tick);
+			} // tick
+		} // init
+
+
+	</script>
+
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
+
