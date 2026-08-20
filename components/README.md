@@ -11,7 +11,7 @@ For this filter, the sampling period (time difference from the previous executio
 The original is fixed at 1.0 second, but I changed this to a parameter.   
 
 # QMI8658   
-I ported from [here](https://github.com/lahavg/QMI8658-Arduino-Library).   
+I ported from [here](https://github.com/ALICHOUCHENE/Qmi8658c).   
 
 # websocket   
 I used [this](https://github.com/Molorius/esp32-websocket) ESP-IDF WebSocket Component.   
